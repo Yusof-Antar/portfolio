@@ -122,133 +122,147 @@
 
 
     <!-- About Start -->
-    <div class="container-xxl py-6" id="about">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-flex align-items-center mb-5">
-                        <div class="years flex-shrink-0 text-center me-4">
-                            <h1 class="display-1 mb-0">
-                                {{ Carbon\Carbon::now()->year - $personal_info->where('key', '=', 'working-year')->first()->value }}
-                            </h1>
-                            <h5 class="mb-0">Years</h5>
+    @if ($personal_info->contains('key', 'working-paragraph'))
+        <div class="container-xxl py-6" id="about">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="d-flex align-items-center mb-5">
+                            <div class="years flex-shrink-0 text-center me-4">
+                                <h1 class="display-1 mb-0">
+                                    {{ Carbon\Carbon::now()->year - $personal_info->where('key', '=', 'working-year')->first()->value }}
+                                </h1>
+                                <h5 class="mb-0">Years</h5>
+                            </div>
+                            <h3 class="lh-base mb-0">
+                                {{ $personal_info->where('key', '=', 'working-slogan')->first()->value }}</h3>
                         </div>
-                        <h3 class="lh-base mb-0">
-                            {{ $personal_info->where('key', '=', 'working-slogan')->first()->value }}</h3>
+                        <p class="mb-4">{{ $personal_info->where('key', '=', 'working-paragraph')->first()->value }}
+                        </p>
+                        @foreach (explode(',', $personal_info->where('key', '=', 'work-adjective')->first()->value) as $item)
+                            <p class="mb-3"><i class="far fa-check-circle text-primary me-3"></i>{{ $item }}
+                            </p>
+                        @endforeach
+                        </p>
+                        {{-- <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a> --}}
                     </div>
-                    <p class="mb-4">{{ $personal_info->where('key', '=', 'working-paragraph')->first()->value }}</p>
-                    @foreach (explode(',', $personal_info->where('key', '=', 'work-adjective')->first()->value) as $item)
-                        <p class="mb-3"><i class="far fa-check-circle text-primary me-3"></i>{{ $item }}</p>
-                    @endforeach
-                    </p>
-                    {{-- <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a> --}}
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="row g-3 mb-4">
-                        <div class="col-sm-6">
-                            <img class="about-img img-fluid rounded"
-                                src="{{ asset('storage/' . $files->where('key', '=', 'about-1')->first()->file) }}"
-                                alt="">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <img class="about-img img-fluid rounded"
+                                    src="{{ asset('storage/' . $files->where('key', '=', 'about-1')->first()->file) }}"
+                                    alt="">
+                            </div>
+                            <div class="col-sm-6">
+                                <img class="about-img img-fluid rounded"
+                                    src="{{ asset('storage/' . $files->where('key', '=', 'about-2')->first()->file) }}"
+                                    alt="">
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <img class="about-img img-fluid rounded"
-                                src="{{ asset('storage/' . $files->where('key', '=', 'about-2')->first()->file) }}"
-                                alt="">
-                        </div>
+                        @if ($personal_info->contains('key', 'happy-client-paragraph'))
+                            <div class="d-flex align-items-center mb-3">
+                                <h5 class="border-end pe-3 me-3 mb-0">Happy Clients</h5>
+                                <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">
+                                    {{ $personal_info->where('key', '=', 'happy-client-value')->first()->value }}</h2>
+                            </div>
+                            <p class="mb-4">
+                                {{ $personal_info->where('key', '=', 'happy-client-paragraph')->first()->value }}</p>
+                        @endif
+                        @if ($personal_info->contains('key', 'project-completed-paragraph'))
+                            <div class="d-flex align-items-center mb-3">
+                                <h5 class="border-end pe-3 me-3 mb-0">Projects Completed</h5>
+                                <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">
+                                    {{ $personal_info->where('key', '=', 'project-completed-value')->first()->value }}
+                                </h2>
+                            </div>
+                            <p class="mb-0">
+                                {{ $personal_info->where('key', '=', 'project-completed-paragraph')->first()->value }}
+                            </p>
+                        @endif
                     </div>
-                    <div class="d-flex align-items-center mb-3">
-                        <h5 class="border-end pe-3 me-3 mb-0">Happy Clients</h5>
-                        <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">
-                            {{ $personal_info->where('key', '=', 'happy-client-value')->first()->value }}</h2>
-                    </div>
-                    <p class="mb-4">
-                        {{ $personal_info->where('key', '=', 'happy-client-paragraph')->first()->value }}</p>
-                    <div class="d-flex align-items-center mb-3">
-                        <h5 class="border-end pe-3 me-3 mb-0">Projects Completed</h5>
-                        <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">
-                            {{ $personal_info->where('key', '=', 'project-completed-value')->first()->value }}</h2>
-                    </div>
-                    <p class="mb-0">
-                        {{ $personal_info->where('key', '=', 'project-completed-paragraph')->first()->value }}</p>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     <!-- About End -->
 
 
     <!-- Expertise Start -->
-    <div class="container-xxl py-6 pb-5" id="skill">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="display-5 mb-5">Skills & Experience</h1>
-                    <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam
-                        rebum amet diam ipsum clita dolor duo clita sit.</p>
-                    <h3 class="mb-4">My Skills</h3>
-                    <div class="row align-items-center">
+    @if ($personal_info->contains('key', 'skill-paragraph'))
+        <div class="container-xxl py-6 pb-5" id="skill">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <h1 class="display-5 mb-5">Skills & Experience</h1>
+                        <p class="mb-4">{{ $personal_info->where('key', '=', 'skill-paragraph')->first()->value }}
+                        </p>
+                        <h3 class="mb-4">My Skills</h3>
+                        <div class="row align-items-center">
 
-                        @foreach ($skills as $skill)
-                            <div class="skill col-6 mb-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="font-weight-bold">{{ $skill->name }}</h6>
-                                    <h6 class="font-weight-bold">{{ $skill->value }}%</h6>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-{{ $skill->color }}" role="progressbar"
-                                        aria-valuenow="{{ $skill->value }}" aria-valuemin="0" aria-valuemax="100">
+                            @foreach ($skills as $skill)
+                                <div class="skill col-6 mb-4">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="font-weight-bold">{{ $skill->name }}</h6>
+                                        <h6 class="font-weight-bold">{{ $skill->value }}%</h6>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-{{ $skill->color }}" role="progressbar"
+                                            aria-valuenow="{{ $skill->value }}" aria-valuemin="0"
+                                            aria-valuemax="100">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
 
 
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <ul class="nav nav-pills rounded border border-2 border-primary mb-5">
-                        <li class="nav-item w-50">
-                            <button class="nav-link w-100 py-3 fs-5 active" data-bs-toggle="pill"
-                                href="#tab-1">Experience</button>
-                        </li>
-                        <li class="nav-item w-50">
-                            <button class="nav-link w-100 py-3 fs-5" data-bs-toggle="pill"
-                                href="#tab-2">Education</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane fade show p-0 active">
-                            <div class="row gy-5 gx-4">
-                                @foreach ($experiences as $experience)
-                                    <div class="col-sm-6">
-                                        <h5>{{ $experience->name }}</h5>
-                                        <hr class="text-primary my-2">
-                                        <p class="text-primary mb-1">{{ $experience->date }}</p>
-                                        <h6 class="mb-0">{{ $experience->location }}</h6>
-                                    </div>
-                                @endforeach
-
-                            </div>
                         </div>
-                        <div id="tab-2" class="tab-pane fade show p-0">
-                            <div class="row gy-5 gx-4">
-                                @foreach ($educations as $education)
-                                    <div class="col-sm-6">
-                                        <h5>{{ $education->name }}</h5>
-                                        <hr class="text-primary my-2">
-                                        <p class="text-primary mb-1">{{ $education->date }}</p>
-                                        <h6 class="mb-0">{{ $education->location }}</h6>
-                                    </div>
-                                @endforeach
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <ul class="nav nav-pills rounded border border-2 border-primary mb-5">
+                            <li class="nav-item w-50">
+                                <button class="nav-link w-100 py-3 fs-5 active" data-bs-toggle="pill"
+                                    href="#tab-1">Experience</button>
+                            </li>
+                            <li class="nav-item w-50">
+                                <button class="nav-link w-100 py-3 fs-5" data-bs-toggle="pill"
+                                    href="#tab-2">Education</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                <div class="row gy-5 gx-4">
+                                    @foreach ($experiences as $experience)
+                                        <div class="col-sm-6">
+                                            <h5>{{ $experience->name }}</h5>
+                                            <hr class="text-primary my-2">
+                                            <p class="text-primary mb-1">{{ $experience->date }}</p>
+                                            <h6 class="mb-0">{{ $experience->location }}</h6>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane fade show p-0">
+                                <div class="row gy-5 gx-4">
+                                    @foreach ($educations as $education)
+                                        <div class="col-sm-6">
+                                            <h5>{{ $education->name }}</h5>
+                                            <hr class="text-primary my-2">
+                                            <p class="text-primary mb-1">{{ $education->date }}</p>
+                                            <h6 class="mb-0">{{ $education->location }}</h6>
+                                        </div>
+                                    @endforeach
 
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+
     <!-- Expertise End -->
 
 
@@ -490,9 +504,7 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form
-                        with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're
-                        done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+
                     <form>
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -546,8 +558,80 @@
     </div>
     <!-- Map End --> --}}
 
+    <!-- Footer Start -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-center text-md-left">
+            <div class="row text-center text-md-left">
+                <!-- About Me Section -->
+                <div class="col-md-3 col-lg-3 col-xl-4 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning">About Me</h5>
+                    <p>
+                        {{ $personal_info->where('key', '=', 'about-paragpraph')->first()->value }}
+                    </p>
+                </div>
 
-    <!-- Copyright Start -->
+                <!-- Contact Section -->
+                <div class="col-md-2 col-lg-2 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+                    <p>
+                        <i class="fas fa-home mr-3 pe-1"></i>
+                        {{ $personal_info->where('key', '=', 'location')->first()->value }}
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope mr-3 pe-1"></i>
+                        {{ $personal_info->where('key', '=', 'email')->first()->value }}
+                    </p>
+                    <p>
+                        <i class="fas fa-phone mr-3 pe-1"></i>
+                        {{ $personal_info->where('key', '=', 'phone-number')->first()->value }}
+                    </p>
+                </div>
+
+                <!-- Social Media Section -->
+                <div class="col-md-3 col-lg-2 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Follow Me</h5>
+                    <div class="d-flex justify-content-center">
+                        @foreach ($social_media_links as $social_media_link)
+                            <a target=”_blank” class="btn btn-square btn-outline-light m-1"
+                                href="{{ $social_media_link->value }}"><i
+                                    class="fab {{ $social_media_link->icon }}"></i></a>
+                        @endforeach
+                    </div>
+
+                </div>
+
+                <!-- Quick Links Section -->
+                {{-- <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Quick Links</h5>
+                    <p>
+                        <a href="#about" class="text-white">About Me</a>
+                    </p>
+                    <p>
+                        <a href="#skills" class="text-white">Skills</a>
+                    </p>
+                    <p>
+                        <a href="#projects" class="text-white">Projects</a>
+                    </p>
+                    <p>
+                        <a href="#contact" class="text-white">Contact</a>
+                    </p>
+                </div> --}}
+            </div>
+
+            <!-- Copyright Section -->
+            <hr class="mb-4">
+            <div class="row align-items-center">
+                <p class="text-center text-md-left">
+                    © 2024 {{ $personal_info->where('key', '=', 'name')->first()->value }}. All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    {{-- <!-- Copyright Start -->
+        
     <div class="container-fluid bg-dark text-white py-4">
         <div class="container">
             <div class="row">
@@ -565,7 +649,7 @@
         </div>
     </div>
     </div>
-    <!-- Copyright End -->
+    <!-- Copyright End --> --}}
 
 
     <!-- Back to Top -->
@@ -576,6 +660,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/lib/wow/wow.min.js') }}"></script>
     <script src="{{ asset('assets/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('assets/lib/waypoints/waypoints.min.js') }}"></script>
