@@ -40,7 +40,7 @@ class SkillResource extends Resource
                 Select::make('color')
                     ->options([
                         'primary' => 'Primary',
-                        'gray' => 'Gray',
+                        'dark' => 'Dark',
                         'success' => 'Success',
                         'danger' => 'Danger',
                         'warning' => ' Warning',
@@ -56,7 +56,7 @@ class SkillResource extends Resource
                 TextColumn::make('name')->searchable(),
 
                 TextColumn::make('value'),
-                ToggleColumn::make('is_Active'),
+                ToggleColumn::make('is_active'),
             ])
             ->filters([
                 //
