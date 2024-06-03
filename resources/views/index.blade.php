@@ -322,11 +322,11 @@
                 <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.1s">
                     @foreach ($projects as $project)
                         <div class="col-lg-4 col-md-6 portfolio-item {{ $project->category->title }}">
-                            <div class="portfolio-img rounded overflow-hidden">
+                            <div style="height: 360px" class="portfolio-img rounded overflow-hidden ratio ratio-1x1">
                                 {{-- <div> --}}
 
-                                <img class="img-fluid" src="{{ asset('storage/' . $project->images[0]) }}"
-                                    alt="">
+                                <img class="img-fluid object-fit-cover"
+                                    src="{{ asset('storage/' . $project->images[0]) }}" alt="">
                                 {{-- </div> --}}
                                 <div class="portfolio-btn justify-content-between">
 
@@ -337,7 +337,8 @@
                                                 href=""><i class="fa fa-images"></i></a>
                                         @endif
                                         @if ($project->link != null)
-                                            <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1"
+                                            <a target="_blank"
+                                                class="btn btn-lg-square btn-outline-secondary border-2 mx-1"
                                                 href="{{ $project->link }}"><i class="fa fa-link"></i></a>
                                         @endif
                                     </div>
