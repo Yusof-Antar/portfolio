@@ -54,7 +54,9 @@ class SkillResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->searchable(),
-
+                TextColumn::make('color')
+                    ->badge()
+                    ->color(fn (Category $record): string => $record->color ?? 'danger'),
                 TextColumn::make('value'),
                 ToggleColumn::make('is_active'),
             ])
